@@ -1,4 +1,9 @@
 import feedparser
+import pathlib
+import re
+import os
+
+root = pathlib.Path(__file__).parent.resolve()
 
 def replace_chunk(content, marker, chunk):
     r = re.compile(
@@ -9,7 +14,7 @@ def replace_chunk(content, marker, chunk):
     return r.sub(chunk, content)
 
 def fetch_blog_entries():
-    entries = feedparser.parse("https://[tld]/feed/")["entries"]
+    entries = feedparser.parse("[https://domain.tld/feed.xml")["entries"]
     return [
         {
             "title": entry["title"],
@@ -19,12 +24,15 @@ def fetch_blog_entries():
         for entry in entries
     ]
 
+
 if __name__ == "__main__":
     readme = root / "README.md"
+    readme_contents = readme.open().read()
+    
     entries = fetch_blog_entries()[:5]
     entries_md = "\n".join(
-        ["* [{title}]({url}) - {published}".format(**entry) for entry in entries]
+        ["- [{title}]({url}) - {published}".format(**entry) for entry in entries]
     )
-    rewritten = replace_chunk(rewritten, "blog", entries_md)
-
+    
+    rewritten = replace_chunk(readme_contents, "blog", entries_md)
     readme.open("w").write(rewritten)
