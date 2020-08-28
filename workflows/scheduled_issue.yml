@@ -1,5 +1,5 @@
 ---
-name: Create issue annually to update Ubuntu
+name: Create issue annually
 on:  # yamllint disable-line rule:truthy
   # Scheduled for 2am on 15th August every year
   schedule:
@@ -7,7 +7,7 @@ on:  # yamllint disable-line rule:truthy
 
 jobs:
   create_issue:
-    name: Create issue to update Ubuntu
+    name: Create scheduled issue
     runs-on: ubuntu-20.04
     steps:
 
@@ -21,6 +21,6 @@ jobs:
           assignees: "MatBenfield"
           labels: "dependencies"
           # assignees & labels in the template are overridden by the values specified in this action
-          template: ".github/ISSUE_TEMPLATE/scheduled/update-ubuntu-version-in-github-actions.md"
+          template: ".github/ISSUE_TEMPLATE/scheduled.md"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
