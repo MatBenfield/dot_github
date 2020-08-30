@@ -32,4 +32,4 @@ jobs:
         a_token: ${{ secrets.TW_ACCESS_TOKEN }}
         a_secret:  ${{ secrets.TW_ACCESS_SECRET }}
       run: |-
-        python 'python/sent_tweet.py'
+        python 'python/send_tweet.py'
