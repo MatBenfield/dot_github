@@ -1,0 +1,7 @@
+---
+layout: empty
+---
+
+Contact: security@thechels.uk
+Preferred-Languages: en
+Canonical: /.well-known/security.txt
