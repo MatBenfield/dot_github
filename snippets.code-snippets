@@ -1,0 +1,47 @@
+{
+	// Place your global snippets here. Each snippet is defined under a snippet name and has a scope, prefix, body and 
+	// description. Add comma separated ids of the languages where the snippet is applicable in the scope field. If scope 
+	// is left empty or omitted, the snippet gets applied to all languages. The prefix is what is 
+	// used to trigger the snippet and the body will be expanded and inserted. Possible variables are: 
+	// $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. 
+	// Placeholders with the same ids are connected.
+	"append_to_json": {
+		"prefix": "a2j",
+		"body": [
+		  "root = pathlib.Path(__file__).parent.parent.resolve()",
+		  "with open( root / f\"{filename}.json\", 'r+') as filehandle:",
+		  "    data = json.load(filehandle)",
+		  "    print(data)",
+		  "    data.append(f\"{content.rstrip()}\")",
+		  "    filehandle.seek(0)",
+		  "    json.dump(data, filehandle, indent=4)"
+		],
+		"description": "AppendToJson"
+	  },
+	  "write_to_file": {
+		"prefix": "w2f",
+		"body": [
+		  "if __name__ == \"__main__\":",
+		  "    index_page = root / \"index.html\"",
+		  "    index_contents = index_page.open().read()",
+		  "    final_output = helper.replace_chunk(index_contents, \"day_marker\", string_today)",
+		  "    index_page.open(\"w\").write(final_output)",
+		  ""
+		],
+		"description": "write_to_file"
+	  },
+	  "get_from_endpoint": {
+		"prefix": "from_end",
+		"body": [
+		  "    endpoint = (",
+		  "        'url'",
+		  "        'payload'",
+		  "    )",
+		  "    response = get(endpoint, timeout=10)",
+		  "    if response.status_code >= 400:",
+		  "        raise RuntimeError(f'Request failed: { response.text }')",
+		  "    return response.json()"
+		],
+		"description": "get_from_endpoint"
+	  }
+}
